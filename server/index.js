@@ -8,7 +8,7 @@ const socket = require("socket.io");
 require("dotenv").config();
 // const Messages = require("./models/messageModel");
 
-app.use(cors());
+app.use(cors({ origin: "https://filoi.vercel.app" }));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URL, {
