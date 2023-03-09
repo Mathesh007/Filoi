@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Logo from "../assets/logo.jpg";
+import Logo from "../assets/logo.png";
 
 export default function Contacts({ contacts, changeChat, user }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
@@ -153,5 +153,10 @@ const Container = styled.div`
         }
       }
     }
+  }
+  @media screen and (max-width: 600px) {
+    /* display: none; */
+    z-index: -1;
+    width: 0;
   }
 `;

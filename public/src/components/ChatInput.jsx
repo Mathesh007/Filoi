@@ -97,6 +97,9 @@ const Container = styled.div`
           background-color: #080420;
         }
       }
+      @media screen and (max-width: 600px) {
+        margin-left: -20px;
+      }
     }
   }
   .input-container {

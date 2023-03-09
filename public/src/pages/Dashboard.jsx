@@ -112,6 +112,7 @@ const DashboardContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     .dashboard {
       height: 80vh;
       width: 60vw;
@@ -202,5 +203,15 @@ const DashboardContainer = styled.div`
         }
       }
     }
+    @media screen and (max-width:600px){
+      .dashboard{
+        width: 90vw;
+        .ranking-section{
+          .rank{
+            width: 80%;
+          }
+        }
+      }
+      }
   }
 `;

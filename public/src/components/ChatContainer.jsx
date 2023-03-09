@@ -166,21 +166,21 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
-    .leader-logout{
+    .leader-logout {
       display: flex;
-        width: 100%;
-        justify-content: flex-end;
-        padding: 1rem;
-        .sep{
-          width:1em;
-        }
-        .leaderboardButton {
-          padding: 0.7rem;
-          border-radius: 0.3rem;
-          background-color: #9a86f3;
-          color: white;
-          cursor : pointer;
-        }
+      width: 100%;
+      justify-content: flex-end;
+      padding: 1rem;
+      .sep {
+        width: 1em;
+      }
+      .leaderboardButton {
+        padding: 0.7rem;
+        border-radius: 0.3rem;
+        background-color: #9a86f3;
+        color: white;
+        cursor: pointer;
+      }
     }
     .user-details {
       display: flex;
@@ -190,7 +190,7 @@ const Container = styled.div`
         img {
           height: 3rem;
         }
-        margin-top : 8px;
+        margin-top: 8px;
       }
       .username {
         h3 {
@@ -240,5 +240,18 @@ const Container = styled.div`
         background-color: #9900ff20;
       }
     }
+  }
+  .input-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      margin-left: 5vw;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    width: 85vw;
+    margin-left: -25vw;
   }
 `;

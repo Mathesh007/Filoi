@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
-import Logo from "../assets/logo.jpg";
+import Logo from "../assets/logo.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginRoute } from "../utils/APIRoutes";
@@ -83,7 +83,7 @@ export default function Login() {
             onChange={(e) => handleChange(e)}
           />
           <button type="submit">Log In</button>
-          <span>
+          <span style={{fontSize:".75em"}}>
             Don't have an account ? <Link to="/register">Create One.</Link>
           </span>
         </form>
@@ -102,6 +102,7 @@ const FormContainer = styled.div`
   gap: 1rem;
   align-items: center;
   background-color: #131324;
+  overflow: hidden;
   .brand {
     display: flex;
     align-items: center;
@@ -158,6 +159,20 @@ const FormContainer = styled.div`
       color: #4e0eff;
       text-decoration: none;
       font-weight: bold;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    form {
+      padding: 2rem;
+      width: 95%;
+      justify-content: center;
+      align-items: center;
+    }
+    input {
+      width: 80%;
+    }
+    button {
+      width: 80%;
     }
   }
 `;

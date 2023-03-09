@@ -106,6 +106,10 @@ const Container = styled.div`
           color: white;
           cursor: pointer;
         }
+        @media screen and (max-width:600px){
+          width: 85vw;
+          margin-left:-20vw;
+        }
       }
     }
   }

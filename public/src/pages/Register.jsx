@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
-import Logo from "../assets/logo.jpg";
+import Logo from "../assets/logo.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { registerRoute } from "../utils/APIRoutes";
@@ -203,6 +203,20 @@ const FormContainer = styled.div`
       color: #4e0eff;
       text-decoration: none;
       font-weight: bold;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    form {
+      padding: 2rem;
+      width: 95%;
+      justify-content: center;
+      align-items: center;
+    }
+    input {
+      width: 80%;
+    }
+    button {
+      width: 80%;
     }
   }
 `;

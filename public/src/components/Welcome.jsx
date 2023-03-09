@@ -29,11 +29,18 @@ const Container = styled.div`
   align-items: center;
   color: white;
   flex-direction: column;
-  gap : 1rem;
+  gap: 1rem;
+  text-align: center;
   img {
     height: 20rem;
   }
   span {
     color: #4e0eff;
+  }
+  height: 80%;
+
+  @media screen and (max-width: 600px) {
+      width: 85vw;
+      margin-left: -20vw;
   }
 `;

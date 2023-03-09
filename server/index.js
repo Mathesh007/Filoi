@@ -9,11 +9,13 @@ require("dotenv").config();
 // const Messages = require("./models/messageModel");
 
 app.use(
-  cors({
+  cors(
+    {
     origin: ["https://filoi.vercel.app"],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  })
+    }
+  )
 );
 app.use(express.json());
 
@@ -36,6 +38,7 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
+    // origin: "*",
     origin: "https://filoi.vercel.app",
     credentials: true,
   },
