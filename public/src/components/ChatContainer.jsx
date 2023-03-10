@@ -8,6 +8,8 @@ import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 import Webcam from "react-webcam";
 import { AiOutlineVideoCamera } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "@material-ui/core";
+import { HiChatBubbleLeftRight } from "react-icons/hi2";
 
 const videoConstraints = {
   width: 600,
@@ -15,11 +17,12 @@ const videoConstraints = {
   facingMode: "user",
 };
 
-export default function ChatContainer({ currentChat, socket }) {
+export default function ChatContainer({ currentChat, socket, handleClick, handleCurrentChat }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [isVideo, setVideo] = useState(false);
+  const isSmallScreen = useMediaQuery("(max-width: 600px)");
 
   useEffect(async () => {
     const data = await JSON.parse(
@@ -79,6 +82,11 @@ export default function ChatContainer({ currentChat, socket }) {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const clickHandler = () => {
+    handleClick();
+    handleCurrentChat();
+  }
+
   return (
     <Container>
       <div className="chat-header">
@@ -102,12 +110,24 @@ export default function ChatContainer({ currentChat, socket }) {
         </div>
       </div>
       <div className="chat-messages">
+        {isSmallScreen && (
+          <HiChatBubbleLeftRight
+            class="chat-icon"
+            style={{
+              color: "#9a86f3",
+              right:"15vw",
+              fontSize: "2em",
+              position:"absolute"
+            }}
+            onClick={clickHandler}
+          />
+        )}
         {isVideo ? (
           <Webcam
             audio={false}
             height={400}
             ref={null}
-            width={600}
+            width={!isSmallScreen ? 600 : 310}
             screenshotFormat="image/jpeg"
             videoConstraints={videoConstraints}
           />

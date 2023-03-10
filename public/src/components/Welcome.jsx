@@ -3,8 +3,10 @@ import styled from "styled-components";
 import Robot from "../assets/robot.gif";
 import Hello from "../assets/hello.gif"
 import Logout from "./Logout";
-export default function Welcome() {
+import { useMediaQuery } from "@material-ui/core";
+export default function Welcome({chatOpen}) {
   const [userName, setUserName] = useState("");
+  const isSmallScreen = useMediaQuery("(max-width: 600px)");
   useEffect(async () => {
     setUserName(
       await JSON.parse(
@@ -12,13 +14,15 @@ export default function Welcome() {
       ).username
     );
   }, []);
+  useEffect(() => { },[chatOpen])
   return (
-    <Container>
-      <img src={Hello} alt="" />
+    <Container style={{ width: isSmallScreen && !chatOpen ? "0" : "100%" , display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+      {(!isSmallScreen || chatOpen) && <div><img src={Hello} alt="" />
       <h1>
         Welcome, <span>{userName} !</span>
       </h1>
-      <h3>Please select a chat to Start messaging.</h3>
+      <h3>Please select a chat to Start messaging.</h3></div>}
+      
     </Container>
   );
 }
@@ -41,6 +45,6 @@ const Container = styled.div`
 
   @media screen and (max-width: 600px) {
       width: 85vw;
-      margin-left: -20vw;
+      margin-left: -10vw;
   }
 `;

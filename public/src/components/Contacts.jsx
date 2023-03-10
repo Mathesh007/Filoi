@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../assets/logo.png";
+import { useMediaQuery } from "@material-ui/core";
 
-export default function Contacts({ contacts, changeChat, user }) {
+export default function Contacts({ contacts, changeChat, user, handleClick , chatOpen }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
+  const isSmallScreen = useMediaQuery("(max-width: 600px)");
   useEffect(async () => {
     const data = await JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
@@ -13,18 +15,32 @@ export default function Contacts({ contacts, changeChat, user }) {
     setCurrentUserName(data.username);
     setCurrentUserImage(data.avatarImage);
   }, []);
+  
+  useEffect(() => {}, [chatOpen]);
+
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
+    handleClick();
   };
+
+
   return (
     <>
       {currentUserImage && currentUserImage && (
-        <Container>
+        <Container
+          style={isSmallScreen?{
+            width: chatOpen ? "0" : "85vw",
+          } :
+        {width:"100%"}}
+        >
           <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h3>Filoi</h3>
-          </div>
+            {!isSmallScreen && <>
+              <img src={Logo} alt="logo" />
+              <h3>Filoi</h3>
+            </>
+            }
+            </div>
           <div className="contacts">
             {contacts.map((contact, index) => {
               if (
@@ -155,8 +171,7 @@ const Container = styled.div`
     }
   }
   @media screen and (max-width: 600px) {
-    /* display: none; */
-    z-index: -1;
-    width: 0;
+    width: 85vw;
+
   }
 `;

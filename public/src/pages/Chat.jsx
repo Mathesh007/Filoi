@@ -8,6 +8,8 @@ import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import Logout from "../components/Logout";
+import { HiChatBubbleLeftRight } from "react-icons/hi2";
+import { useMediaQuery } from "@material-ui/core";
 
 export default function Chat() {
   const navigate = useNavigate();
@@ -15,6 +17,8 @@ export default function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [chatOpen, setChatOpen] = useState(true);
+  const isSmallScreen = useMediaQuery("(max-width: 600px)");
 
   useEffect(async () => {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
@@ -27,6 +31,11 @@ export default function Chat() {
       );
     }
   }, []);
+
+  useEffect(() => {
+    console.log(chatOpen);
+  },[chatOpen,currentChat])
+
   useEffect(() => {
     if (currentUser) {
       socket.current = io(host);
@@ -47,6 +56,15 @@ export default function Chat() {
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
   };
+
+  const handleClick = () => {
+    setChatOpen(!chatOpen);
+  }
+
+  const handleCurrentChat = () => {
+    setCurrentChat(undefined)
+  }
+
   return (
     <>
       <Container>
@@ -55,19 +73,33 @@ export default function Chat() {
             contacts={contacts}
             changeChat={handleChatChange}
             user={currentUser}
+            handleClick={handleClick}
+            chatOpen={chatOpen}
           />
           {currentChat === undefined ? (
-            <div className="welcome-wrapper">
+            <div
+              className="welcome-wrapper"
+              style={{ width: isSmallScreen && !chatOpen ? "0" : "100%" }}
+            >
               <div className="welcome-header">
                 <Link to="/dashboard">
                   <button className="leaderboardButton">Leaderboards</button>
                 </Link>
+                <HiChatBubbleLeftRight
+                  class="chat-icon"
+                  style={{
+                    color: "#9a86f3",
+                    marginTop: "10px",
+                    fontSize: "1.8em",
+                  }}
+                  onClick={handleClick}
+                />
                 <Logout />
               </div>
-              <Welcome />
+              <Welcome chatOpen={chatOpen} />
             </div>
           ) : (
-            <ChatContainer currentChat={currentChat} socket={socket} />
+              <ChatContainer currentChat={currentChat} socket={socket} handleClick={handleClick} handleCurrentChat={ handleCurrentChat } />
           )}
         </div>
       </Container>
@@ -106,9 +138,16 @@ const Container = styled.div`
           color: white;
           cursor: pointer;
         }
+        .chat-icon{
+          display: none;
+          cursor: pointer;
+        }
         @media screen and (max-width:600px){
           width: 85vw;
           margin-left:-20vw;
+          .chat-icon{
+            display: block;
+          }
         }
       }
     }
