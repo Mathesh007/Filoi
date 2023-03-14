@@ -160,11 +160,8 @@ export default function ChatContainer({ currentChat, socket, handleClick, handle
             e.preventDefault();
             setVideo(!isVideo);
           }}
+          className="videocam"
           style={{
-            fontSize: "40px",
-            margin: "10px 5px 10px 25px",
-            color: "white",
-            textAlign: "center",
           }}
         />
         <ChatInput handleSendMsg={handleSendMsg} />
@@ -217,6 +214,15 @@ const Container = styled.div`
           color: white;
         }
       }
+      @media screen and (max-width: 600px) {
+        margin-left: 7vw;
+      }
+    }
+    @media screen and (max-width: 600px) {
+      .sep{
+        width: 0.5rem;
+      }
+      margin-left: -5vw;
     }
   }
   .chat-messages {
@@ -237,7 +243,7 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       .content {
-        max-width: 40%;
+        max-width: 60%;
         overflow-wrap: break-word;
         padding: 1rem;
         font-size: 1.1rem;
@@ -247,11 +253,17 @@ const Container = styled.div`
           max-width: 70%;
         }
       }
+      @media screen and (max-width: 600px) {
+        margin-left: 10vw;
+      }
     }
     .sended {
       justify-content: flex-end;
       .content {
         background-color: #4f04ff21;
+      }
+      @media screen and (max-width: 600px) {
+        margin-right: 8vw;
       }
     }
     .recieved {
@@ -265,13 +277,22 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    .videocam {
+      font-size: 40px;
+      margin: 10px 5px 10px 25px;
+      color: white;
+      text-align: center;
+    }
     @media screen and (max-width: 600px) {
       width: 100%;
-      margin-left: 5vw;
+      margin-left: 8vw;
+      .videocam {
+        margin: 5px;
+      }
     }
   }
   @media screen and (max-width: 600px) {
-    width: 85vw;
-    margin-left: -25vw;
+    width: 93vw;
+    margin-left: -28vw;
   }
 `;

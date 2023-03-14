@@ -10,11 +10,11 @@ require("dotenv").config();
 
 app.use(
   cors(
-    {
-    origin: ["https://filoi.vercel.app"],
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    }
+    // {
+    // origin: ["https://filoi.vercel.app"],
+    // methods: ["GET", "POST"],
+    // allowedHeaders: ["Content-Type", "Authorization"],
+    // }
   )
 );
 app.use(express.json());
@@ -38,8 +38,8 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    // origin: "*",
-    origin: "https://filoi.vercel.app",
+    origin: "*",
+    // origin: "https://filoi.vercel.app",
     credentials: true,
   },
 });

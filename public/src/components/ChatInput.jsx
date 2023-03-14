@@ -36,12 +36,12 @@ export default function ChatInput({ handleSendMsg }) {
       <form className="input-container" onSubmit={(event) => sendChat(event)}>
         <input
           type="text"
-          placeholder="type your message here"
+          placeholder="Message"
           onChange={(e) => setMsg(e.target.value)}
           value={msg}
         />
         <button type="submit">
-          <IoMdSend />
+          <IoMdSend className="send-btn"/>
         </button>
       </form>
     </Container>
@@ -124,6 +124,9 @@ const Container = styled.div`
       &:focus {
         outline: none;
       }
+      @media screen and (max-width: 600px) {
+        width: 50%;
+      }
     }
     button {
       padding: 0.3rem 2rem;
@@ -143,6 +146,14 @@ const Container = styled.div`
         font-size: 2rem;
         color: white;
       }
+      @media screen and (max-width: 600px) {
+        svg{
+          font-size: 1rem;
+        }
+      }
+    }
+    @media screen and (max-width: 600px) {
+      width: 80%;
     }
   }
 `;
